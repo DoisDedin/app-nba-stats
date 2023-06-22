@@ -3,8 +3,14 @@ package com.example.nbastat_origin.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.nbastat_origin.data.PlayersRepository
 
-class HomeViewModel : ViewModel() {
+internal class PlayersListViewModel(
+    private val playersRepository: PlayersRepository
+) : ViewModel() {
+
+    private val _plyersListLiveData = MutableLiveData<Result<User>>()
+    val userLiveData: LiveData<Result<User>> get() = _userLiveData
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
