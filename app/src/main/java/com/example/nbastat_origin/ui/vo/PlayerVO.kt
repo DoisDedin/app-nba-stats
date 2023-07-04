@@ -17,5 +17,6 @@ data class PlayerVO(
     val birthCountry: String,
     val globalTeamID: Int,
     val height: Int,
-    val weight: Int
+    val weight: Int,
+    val photoUrl : String
 )

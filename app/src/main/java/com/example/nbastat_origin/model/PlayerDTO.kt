@@ -19,5 +19,6 @@ data class PlayerDTO(
     @SerializedName("BirthCountry") val birthCountry: String?,
     @SerializedName("GlobalTeamID") val globalTeamID: Int?,
     @SerializedName("Height") val height: Int?,
-    @SerializedName("Weight") val weight: Int?
+    @SerializedName("Weight") val weight: Int?,
+    @SerializedName("PhotoUrl") val photoUrl : String?
 )

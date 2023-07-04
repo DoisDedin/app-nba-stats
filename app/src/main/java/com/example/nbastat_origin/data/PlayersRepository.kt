@@ -39,7 +39,7 @@ internal class PlayersRepository(
                 )
             }
         } catch (e: Exception) {
-            val errorMessage = "Exception: ${e.message}"
+          //  val errorMessage = "Exception: ${e.message}"
 
             val mockedList = listOf(
                 PlayerDTO(
@@ -59,7 +59,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000029,
                     height = 76,
-                    weight = 207
+                    weight = 207,
+                    photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
                 ),
                 PlayerDTO(
                     playerID = 20000443,
@@ -78,7 +79,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000010,
                     height = 80,
-                    weight = 198
+                    weight = 198,
+                    photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
                 ),
                 PlayerDTO(
                     playerID = 20000452,
@@ -97,7 +99,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000023,
                     height = 78,
-                    weight = 195
+                    weight = 195,
+                    photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
                 ),
                 PlayerDTO(
                     playerID = 20000455,
@@ -116,7 +119,8 @@ internal class PlayersRepository(
                     birthCountry = "Lithuania",
                     globalTeamID = 20000023,
                     height = 83,
-                    weight = 265
+                    weight = 265,
+                    photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
                 ),
                 PlayerDTO(
                     playerID = 20000456,
@@ -135,7 +139,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000011,
                     height = 78,
-                    weight = 220
+                    weight = 220,
+                    photoUrl = ""
                 ),
                 PlayerDTO(
                     playerID = 20000457,
@@ -154,7 +159,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000004,
                     height = 72,
-                    weight = 196
+                    weight = 196,
+                    photoUrl = ""
                 ),
                 PlayerDTO(
                     playerID = 20000468,
@@ -173,7 +179,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000027,
                     height = 82,
-                    weight = 253
+                    weight = 253,
+                    photoUrl = ""
                 ),
                 PlayerDTO(
                     playerID = 20000474,
@@ -192,7 +199,8 @@ internal class PlayersRepository(
                     birthCountry = "USA",
                     globalTeamID = 20000015,
                     height = 77,
-                    weight = 205
+                    weight = 205,
+                    photoUrl = ""
                 ),
             )
             emit(

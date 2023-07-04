@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nbastat_origin.common.ErrorData
 import com.example.nbastat_origin.common.UiError
 import com.example.nbastat_origin.common.UiLoading
 import com.example.nbastat_origin.common.UiSuccess
+import com.example.nbastat_origin.common.observeOnError
+import com.example.nbastat_origin.common.observeOnLoading
+import com.example.nbastat_origin.common.observeOnSuccess
 import com.example.nbastat_origin.databinding.FragmentListPlayersBinding
+import com.example.nbastat_origin.ui.vo.PlayerVO
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -19,6 +26,7 @@ class PlayersListFragment : Fragment(), KodeinAware {
     override val kodein by closestKodein()
 
     private val viewModel: PlayersListViewModel by instance()
+    private lateinit var myAdapter: PlayersListAdapter
 
     private var _binding: FragmentListPlayersBinding? = null
 
@@ -39,33 +47,41 @@ class PlayersListFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startAdapter()
         setObservers()
         viewModel.getPlayers()
 
     }
 
+    private fun startAdapter() {
+        myAdapter = PlayersListAdapter()
+        binding.recyclerviewPlayers.adapter = myAdapter
+        myAdapter.setOnClick(itemClickListener)
+
+    }
+
+    private val itemClickListener: (PlayerVO) -> Unit = { player ->
+        // Lidar com o clique no item aqui
+        Toast.makeText(this.context, "Clicou no jogador: ${player.firstName}", Toast.LENGTH_SHORT)
+            .show()
+    }
+
     private fun setObservers() {
-        viewModel.playersListLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is UiLoading -> stateLoading()
-                is UiSuccess -> stateSuccess()
-                is UiError -> stateError()
-                else -> stateError()
-            }
-        }
+        viewModel.playersListLiveData.observeOnSuccess(this, ::onSuccess)
+            .observeOnLoading(this, ::onLoading)
+            .observeOnError(this, ::onError)
     }
 
-    private fun stateLoading() {
-
+    private fun onSuccess(listPlayers: List<PlayerVO>) {
+        myAdapter.addPlayers(listPlayers)
     }
 
-    private fun stateError() {
+    private fun onLoading(){
 
     }
 
-    private fun stateSuccess() {
+    private fun onError(errorData : ErrorData){}
 
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

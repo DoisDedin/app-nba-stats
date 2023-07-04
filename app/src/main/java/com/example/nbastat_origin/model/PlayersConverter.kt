@@ -26,7 +26,8 @@ class PlayersConverter() {
                 birthCountry = dto.birthCountry ?: "",
                 globalTeamID = dto.globalTeamID ?: 0,
                 height = dto.height ?: 0,
-                weight = dto.weight ?: 0
+                weight = dto.weight ?: 0,
+                photoUrl = dto.photoUrl ?: ""
             )
         }
     }
