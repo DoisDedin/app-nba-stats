@@ -1,15 +1,15 @@
 package com.example.nbastat_origin.application
 
 import android.app.Application
-import com.example.nbastat_origin.di.AppModule
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.androidCoreModule
+import com.example.nbastat_origin.di.apppModule
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.androidXModule
 
-class CustomApplication : Application(), DIAware {
+class CustomApplication : Application(), KodeinAware {
 
-    override val di: DI by DI.lazy {
-        import(androidCoreModule(this@CustomApplication))
-        import(AppModule().kodein)
+    override val kodein = Kodein.lazy {
+        import(androidXModule(this@CustomApplication))
+        import(apppModule)
     }
 }
