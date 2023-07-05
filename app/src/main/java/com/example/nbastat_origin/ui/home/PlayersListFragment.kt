@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.viewModels
 import com.example.nbastat_origin.common.ErrorData
-import com.example.nbastat_origin.common.UiError
-import com.example.nbastat_origin.common.UiLoading
-import com.example.nbastat_origin.common.UiSuccess
 import com.example.nbastat_origin.common.observeOnError
 import com.example.nbastat_origin.common.observeOnLoading
 import com.example.nbastat_origin.common.observeOnSuccess
@@ -29,9 +26,6 @@ class PlayersListFragment : Fragment(), KodeinAware {
     private lateinit var myAdapter: PlayersListAdapter
 
     private var _binding: FragmentListPlayersBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -40,9 +34,7 @@ class PlayersListFragment : Fragment(), KodeinAware {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListPlayersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +42,6 @@ class PlayersListFragment : Fragment(), KodeinAware {
         startAdapter()
         setObservers()
         viewModel.getPlayers()
-
     }
 
     private fun startAdapter() {
@@ -76,11 +67,11 @@ class PlayersListFragment : Fragment(), KodeinAware {
         myAdapter.addPlayers(listPlayers)
     }
 
-    private fun onLoading(){
+    private fun onLoading() {
 
     }
 
-    private fun onError(errorData : ErrorData){}
+    private fun onError(errorData: ErrorData) {}
 
 
     override fun onDestroyView() {

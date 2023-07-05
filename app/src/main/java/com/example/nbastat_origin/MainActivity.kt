@@ -8,9 +8,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.nbastat_origin.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(), KodeinAware {
+    override val kodein by closestKodein()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,5 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
-
 
 }

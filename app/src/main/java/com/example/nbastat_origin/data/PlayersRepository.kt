@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-internal class PlayersRepository(
+class PlayersRepository(
     private val playersApi: NbaApiService
 ) {
     suspend fun getPlayers(): Flow<UiState<List<PlayerDTO>>> = flow {

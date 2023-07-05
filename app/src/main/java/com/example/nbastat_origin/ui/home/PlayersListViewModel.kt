@@ -15,7 +15,7 @@ import com.example.nbastat_origin.ui.vo.PlayerVO
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-internal class PlayersListViewModel(
+class PlayersListViewModel(
     private val playersRepository: PlayersRepository,
     private val playersConverter: PlayersConverter
 ) : ViewModel() {
@@ -90,4 +90,5 @@ internal class PlayersListViewModel(
 
         }
     }
+
 }
