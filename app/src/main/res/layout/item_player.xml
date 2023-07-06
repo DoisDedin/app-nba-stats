@@ -3,30 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/background_primary">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_secondary"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageview_photo"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@drawable/circle_shape_photo"
+        android:importantForAccessibility="no"
         android:padding="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_dashboard_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <TextView
         android:id="@+id/textview_player_name"
         android:layout_width="0dp"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/text_primary"
-        android:paddingTop="16dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingHorizontal="16dp"
+        android:text="Name: jhon mackgragor"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageview_photo"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Abraham Limcom" />
+        app:layout_constraintTop_toTopOf="@id/imageview_photo" />
+
+    <TextView
+        android:id="@+id/textview_team"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingStart="16dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/textview_player_name"
+        app:layout_constraintStart_toStartOf="@id/textview_player_name"
+        app:layout_constraintTop_toBottomOf="@id/textview_player_name"
+        tools:text="Team: Lakers" />
+
+    <TextView
+        android:id="@+id/textview_position"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textview_team"
+        tools:text="Position: Forward" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
