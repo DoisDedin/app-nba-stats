@@ -4,7 +4,8 @@
     <color name="primary">#FFFF5722</color> <!-- Laranja principal -->
     <color name="secondary">#FFFF9800</color> <!-- Laranja secundário -->
     <color name="accent">#FFFFC107</color> <!-- Laranja acentuado -->
-    <color name="text_primary">#FF000000</color> <!-- Preto -->
+    <color name="text_primary">#FF000000</color>
+    <color name="text_primary_invert">#FFFFFFFF</color> <!-- Preto -->
     <color name="text_secondary">#FF757575</color> <!-- Cinza -->
     <color name="background_primary">#FFFFFFFF</color> <!-- Branco -->
     <color name="background_secondary">#FFF5F5F5</color> <!-- Cinza claro -->

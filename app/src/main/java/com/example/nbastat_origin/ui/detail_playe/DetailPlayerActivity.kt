@@ -15,7 +15,6 @@ import com.example.nbastat_origin.databinding.ActivityDetailPlayerBinding
 
 class DetailPlayerActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDetailPlayerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,21 +24,17 @@ class DetailPlayerActivity : AppCompatActivity() {
         binding = ActivityDetailPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        setSupportActionBar(binding.toolbar)
+
         val navController = findNavController(R.id.nav_host_fragment_content_detail_player)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_detail_player)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 
     companion object {

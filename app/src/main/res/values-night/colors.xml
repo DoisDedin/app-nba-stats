@@ -5,6 +5,7 @@
     <color name="secondary">#FFEF6C00</color> <!-- Laranja médio -->
     <color name="accent">#FFFF8F00</color> <!-- Laranja claro -->
     <color name="text_primary">#FFFFFFFF</color> <!-- Branco -->
+    <color name="text_primary_invert">#FF000000</color>
     <color name="text_secondary">#FFBDBDBD</color> <!-- Cinza claro -->
     <color name="background_primary">#FF000000</color> <!-- Preto -->
     <color name="background_secondary">#FF212121</color> <!-- Cinza escuro -->
