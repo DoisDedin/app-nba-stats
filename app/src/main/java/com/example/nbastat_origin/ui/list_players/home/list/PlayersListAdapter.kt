@@ -1,6 +1,7 @@
-package com.example.nbastat_origin.ui.home
+package com.example.nbastat_origin.ui.list_players.home.list
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.nbastat_origin.databinding.ItemPlayerBinding
-import com.example.nbastat_origin.ui.vo.PlayerVO
+import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 
 class PlayersListAdapter :
     RecyclerView.Adapter<PlayersListAdapter.ItemViewHolder>() {
@@ -52,9 +53,12 @@ class PlayersListAdapter :
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
+
+        var longClickHandler: Handler? = null
+        val longClickDuration = 2000L
         // Bind item data to the view
         fun bind(item: PlayerVO) {
-            binding.textviewPlayerName.text = "Name: ${item.firstName} ${item.lastName}"
+            binding.textviewPlayerName.text = "Nome: ${item.firstName} ${item.lastName}"
             binding.textviewPosition.text =  "Posição: ${item.position}"
             binding.textviewTeam.text = "Time: ${item.team}"
 
@@ -63,6 +67,15 @@ class PlayersListAdapter :
                 .apply(RequestOptions.circleCropTransform())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Opcional: cache da imagem
                 .into(binding.imageviewPhoto)
+
+            binding.constraintContainer.setOnLongClickListener { view ->
+                longClickHandler = Handler()
+                longClickHandler?.postDelayed({
+                    executeOnClick.invoke(item)
+                }, longClickDuration)
+
+                true // Retorna true para indicar que o clique longo foi consumido
+            }
         }
     }
 

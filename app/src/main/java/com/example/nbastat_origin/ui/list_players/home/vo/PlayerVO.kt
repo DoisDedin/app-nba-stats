@@ -1,4 +1,4 @@
-package com.example.nbastat_origin.ui.vo
+package com.example.nbastat_origin.ui.list_players.home.vo
 
 data class PlayerVO(
     val playerID: Int,

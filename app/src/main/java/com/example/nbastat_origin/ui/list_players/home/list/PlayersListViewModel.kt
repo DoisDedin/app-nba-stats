@@ -1,4 +1,4 @@
-package com.example.nbastat_origin.ui.home
+package com.example.nbastat_origin.ui.list_players.home.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.example.nbastat_origin.common.UiState
 import com.example.nbastat_origin.common.UiSuccess
 import com.example.nbastat_origin.data.PlayersRepository
 import com.example.nbastat_origin.model.PlayersConverter
-import com.example.nbastat_origin.ui.vo.PlayerVO
+import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 

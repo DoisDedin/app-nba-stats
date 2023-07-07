@@ -5,7 +5,7 @@ import com.example.nbastat_origin.data.PlayersRepository
 import com.example.nbastat_origin.data.remote.api.NbaApiService
 import com.example.nbastat_origin.data.remote.client.MyRetrofitClient
 import com.example.nbastat_origin.model.PlayersConverter
-import com.example.nbastat_origin.ui.home.PlayersListViewModel
+import com.example.nbastat_origin.ui.list_players.home.list.PlayersListViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind

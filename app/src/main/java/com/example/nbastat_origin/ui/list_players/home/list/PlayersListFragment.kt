@@ -1,4 +1,4 @@
-package com.example.nbastat_origin.ui.home
+package com.example.nbastat_origin.ui.list_players.home.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.nbastat_origin.common.ErrorData
 import com.example.nbastat_origin.common.observeOnError
 import com.example.nbastat_origin.common.observeOnLoading
 import com.example.nbastat_origin.common.observeOnSuccess
 import com.example.nbastat_origin.databinding.FragmentListPlayersBinding
-import com.example.nbastat_origin.ui.vo.PlayerVO
+import com.example.nbastat_origin.ui.detail_playe.DetailPlayerActivity
+import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -52,9 +52,7 @@ class PlayersListFragment : Fragment(), KodeinAware {
     }
 
     private val itemClickListener: (PlayerVO) -> Unit = { player ->
-        // Lidar com o clique no item aqui
-        Toast.makeText(this.context, "Clicou no jogador: ${player.firstName}", Toast.LENGTH_SHORT)
-            .show()
+        DetailPlayerActivity.start(requireContext(), playerId = player.playerID, false)
     }
 
     private fun setObservers() {

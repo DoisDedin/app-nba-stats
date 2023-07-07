@@ -1,6 +1,6 @@
 package com.example.nbastat_origin.model
 
-import com.example.nbastat_origin.ui.vo.PlayerVO
+import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 
 class PlayersConverter() {
     fun convert(dtoList: List<PlayerDTO>): List<PlayerVO> {

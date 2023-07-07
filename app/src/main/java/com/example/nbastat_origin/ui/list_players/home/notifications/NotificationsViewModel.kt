@@ -1,13 +1,13 @@
-package com.example.nbastat_origin.ui.dashboard
+package com.example.nbastat_origin.ui.list_players.home.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class NotificationsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Favoritos"
+        value = "Mais comentados"
     }
     val text: LiveData<String> = _text
 }
