@@ -12,6 +12,7 @@
         android:layout_height="48dp"
         android:importantForAccessibility="no"
         android:padding="6dp"
+        android:paddingStart="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_dashboard_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
