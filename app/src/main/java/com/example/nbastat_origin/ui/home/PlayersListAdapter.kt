@@ -30,14 +30,6 @@ class PlayersListAdapter :
 
     override fun getItemCount(): Int = playersList.size
 
-    override fun getItemViewType(position: Int): Int {
-        return if (false) {
-            VIEW_TYPE_LOADING
-        } else {
-            VIEW_TYPE_ITEM
-        }
-    }
-
     fun setOnClick(executeOnClick: (playerVO: PlayerVO) -> Unit) {
         this.executeOnClick = executeOnClick
     }
