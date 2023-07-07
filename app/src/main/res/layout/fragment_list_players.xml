@@ -16,6 +16,7 @@
        tools:itemCount="3"
        tools:listitem="@layout/item_player"
        app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"/>
+       app:layout_constraintBottom_toBottomOf="parent"
+       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
