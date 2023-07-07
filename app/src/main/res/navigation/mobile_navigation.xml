@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.nbastat_origin.ui.home.PlayersListFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_players_list"
         tools:layout="@layout/fragment_list_players" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.nbastat_origin.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_players_star"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.nbastat_origin.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_players_hot"
         tools:layout="@layout/fragment_player_details" />
 </navigation>

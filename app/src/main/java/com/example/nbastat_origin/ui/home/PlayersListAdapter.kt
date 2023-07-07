@@ -62,7 +62,10 @@ class PlayersListAdapter :
         RecyclerView.ViewHolder(binding.root) {
         // Bind item data to the view
         fun bind(item: PlayerVO) {
-            binding.textviewPlayerName.text = item.firstName
+            binding.textviewPlayerName.text = "Name: ${item.firstName} ${item.lastName}"
+            binding.textviewPosition.text =  "Posição: ${item.position}"
+            binding.textviewTeam.text = "Time: ${item.team}"
+
             Glide.with(context)
                 .load(item.photoUrl)
                 .apply(RequestOptions.circleCropTransform())
