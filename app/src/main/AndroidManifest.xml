@@ -19,7 +19,7 @@
             android:name=".ui.detail_playe.DetailPlayerActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_player"
-            android:theme="@style/Theme.Nbastatorigin.NoActionBar" />
+            android:theme="@style/Nbastatorigin.NoActionBar" />
         <activity
             android:name=".ui.list_players.MainActivity"
             android:exported="true"

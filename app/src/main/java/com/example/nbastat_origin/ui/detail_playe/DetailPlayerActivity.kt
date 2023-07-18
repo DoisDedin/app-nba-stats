@@ -24,6 +24,7 @@ class DetailPlayerActivity : AppCompatActivity() {
         binding = ActivityDetailPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+      //  setSupportActionBar(binding.toolbar)
         binding.fab.setOnClickListener {
             this.finish()
         }

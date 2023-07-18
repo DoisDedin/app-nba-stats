@@ -38,7 +38,7 @@
         <!-- Outras definições de estilo -->
     </style>
 
-    <style name="Theme.Nbastatorigin.NoActionBar">
+    <style name="Nbastatorigin.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/accent</item>
@@ -50,8 +50,7 @@
         <!-- Status bar color. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-
+        <item name="android:statusBarColor">@color/primary</item>
         <!-- Outras definições de estilo -->
     </style>
 </resources>
