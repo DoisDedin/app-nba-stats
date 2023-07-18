@@ -23,6 +23,7 @@
         <activity
             android:name=".ui.list_players.MainActivity"
             android:exported="true"
+            android:theme="@style/AppTheme.DetailPlayerActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
