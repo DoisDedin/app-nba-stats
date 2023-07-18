@@ -24,16 +24,8 @@ class DetailPlayerActivity : AppCompatActivity() {
         binding = ActivityDetailPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_detail_player)
-        setupActionBarWithNavController(navController)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+        binding.fab.setOnClickListener {
+            this.finish()
         }
     }
 
