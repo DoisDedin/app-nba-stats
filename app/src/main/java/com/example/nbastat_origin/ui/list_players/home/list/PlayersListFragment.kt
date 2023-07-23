@@ -52,6 +52,7 @@ class PlayersListFragment :
         viewModel.getPlayers()
     }
 
+
     private fun startAdapter() {
         myAdapter = PlayersListAdapter(PlayersFilter(this))
         binding.recyclerviewPlayers.adapter = myAdapter
