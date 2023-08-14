@@ -30,11 +30,12 @@ class CustomApplication : Application(), KodeinAware {
             PlayersRepository(
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
         bind() from provider { PlayersListViewModel(instance()) }
-        bind<PlayersDataBase>() with singleton { PlayersDataBase.getInstance(instance()) }
+        bind<PlayersDataBase>() with singleton { PlayersDataBase.getInstance(applicationContext) }
         bind<PlayerDao>() with singleton { instance<PlayersDataBase>().playerDao() }
     }
 }

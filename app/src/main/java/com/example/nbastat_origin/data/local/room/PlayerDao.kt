@@ -11,7 +11,7 @@ import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 interface PlayerDao {
 
     @Query("SELECT * FROM players")
-    fun getAllPlayers(): LiveData<List<PlayerVO>>
+    fun getAllPlayers(): List<PlayerVO>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlayers(players: List<PlayerVO>)
