@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.nbastat_origin.common.ErrorData
-import com.example.nbastat_origin.common.observeOnError
-import com.example.nbastat_origin.common.observeOnLoading
-import com.example.nbastat_origin.common.observeOnSuccess
+import com.example.nbastat_origin.common.observe
 import com.example.nbastat_origin.databinding.FragmentListPlayersBinding
 import com.example.nbastat_origin.ui.detail_playe.DetailPlayerActivity
 import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
@@ -65,9 +63,27 @@ class PlayersListFragment :
     }
 
     private fun setObservers() {
-        viewModel.playersListLiveData.observeOnSuccess(this, ::onSuccess)
-            .observeOnLoading(this, ::onLoading)
-            .observeOnError(this, ::onError)
+        viewModel.apply {
+            observe(state) { state ->
+
+                if (state.isQuerying) {
+                    onLoading()
+                } else {
+                    //desabilitar progress
+                }
+                if (state.errorData.errorCode != 0) {
+                    onError(state.errorData)
+                } else {
+                    Unit
+                }
+
+                if (state.listPlayers.isEmpty()) {
+                    //sem posts novos
+                } else {
+                    onSuccess(state.listPlayers)
+                }
+            }
+        }
     }
 
     private fun onSuccess(listPlayers: List<PlayerVO>) {

@@ -1,12 +1,12 @@
 package com.example.nbastat_origin.data
 
 import com.example.nbastat_origin.common.ErrorData
-import com.example.nbastat_origin.common.UiError
-import com.example.nbastat_origin.common.UiLoading
-import com.example.nbastat_origin.common.UiState
-import com.example.nbastat_origin.common.UiSuccess
+import com.example.nbastat_origin.data.local.room.PlayersDataBase
 import com.example.nbastat_origin.data.remote.api.NbaApiService
 import com.example.nbastat_origin.model.PlayerDTO
+import com.example.nbastat_origin.model.PlayersConverter
+import com.example.nbastat_origin.ui.list_players.home.list.ListFragmentState
+import com.example.nbastat_origin.ui.list_players.home.vo.PlayerVO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -14,24 +14,43 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class PlayersRepository(
-    private val playersApi: NbaApiService
+    private val playersApi: NbaApiService,
+    private val playersDataBase: PlayersDataBase,
+    private val playersConverter: PlayersConverter
 ) {
-    suspend fun getPlayers(): Flow<UiState<List<PlayerDTO>>> = flow {
-        emit(UiLoading)
+
+    suspend fun insertPlayersInDao(players: List<PlayerVO>) {
+        playersDataBase.playerDao().insertPlayers(players)
+    }
+
+
+    suspend fun getPlayers(): Flow<ListFragmentState> = flow {
+        emit(
+            ListFragmentState(
+                isQuerying = true
+            )
+        )
         try {
             val response = playersApi.getPlayers("")
 
             if (response.isSuccessful && response.body().isNullOrEmpty()) {
                 response.body()?.let { listPlayerSDTO ->
-                    emit(UiSuccess(listPlayerSDTO))
+                    emit(ListFragmentState(playersConverter.convert(listPlayerSDTO)))
                 } ?: run {
-                    emit(UiError(errorData = ErrorData(errorCode = 1, errorMessage = "Body Error")))
+                    emit(
+                        ListFragmentState(
+                            errorData = ErrorData(
+                                errorCode = 1,
+                                errorMessage = "Body Error"
+                            )
+                        )
+                    )
                 }
             } else {
                 val errorMessage = "Error: ${response.code()}"
                 emit(
-                    UiError(
-                        ErrorData(
+                    ListFragmentState(
+                        errorData = ErrorData(
                             errorCode = 2,
                             errorMessage = errorMessage
                         )
@@ -39,7 +58,7 @@ class PlayersRepository(
                 )
             }
         } catch (e: Exception) {
-          //  val errorMessage = "Exception: ${e.message}"
+            //  val errorMessage = "Exception: ${e.message}"
 
             val mockedList = listOf(
                 PlayerDTO(
@@ -121,7 +140,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -200,7 +220,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -279,7 +300,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -358,7 +380,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -437,7 +460,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -516,7 +540,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -595,7 +620,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -674,7 +700,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -753,7 +780,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -832,7 +860,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -911,7 +940,8 @@ class PlayersRepository(
                     height = 83,
                     weight = 265,
                     photoUrl = "https://cdn.pixabay.com/photo/2018/06/17/20/35/chain-3481377_1280.jpg"
-                ),PlayerDTO(
+                ),
+                PlayerDTO(
                     playerID = 20000441,
                     sportsDataID = "",
                     status = "Active",
@@ -1072,6 +1102,8 @@ class PlayersRepository(
                     photoUrl = ""
                 ),
             )
+            val convertedList = playersConverter.convert(mockedList)
+            insertPlayersInDao(convertedList)
             emit(
 //                UiError(
 //                    ErrorData(
@@ -1079,14 +1111,14 @@ class PlayersRepository(
 //                        errorMessage = errorMessage
 //                    )
 //                )
-                UiSuccess(mockedList)
+                ListFragmentState(convertedList)
             )
         }
     }.catch { e ->
         val errorMessage = "Exception: ${e.message}"
         emit(
-            UiError(
-                ErrorData(
+            ListFragmentState(
+                errorData = ErrorData(
                     errorCode = 2,
                     errorMessage = errorMessage
                 )
