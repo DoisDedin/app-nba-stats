@@ -31,7 +31,7 @@ class CustomApplication : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
-                instance()
+                applicationContext
             )
         }
         bind() from provider { PlayersListViewModel(instance()) }
