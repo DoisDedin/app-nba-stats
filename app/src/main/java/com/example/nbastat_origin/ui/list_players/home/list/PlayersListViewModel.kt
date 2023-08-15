@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nbastat_origin.common.ErrorData
 import com.example.nbastat_origin.data.PlayersRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class PlayersListViewModel(
@@ -52,7 +54,7 @@ class PlayersListViewModel(
                         errorMessage = it.message.toString()
                     )
                 )
-            }.collect { uiState ->
+            }.flowOn(Dispatchers.IO).collect { uiState ->
                 _playersListLiveData.postValue(
                     _playersListLiveData.value?.copy(listPlayers = uiState.listPlayers)
                 )
