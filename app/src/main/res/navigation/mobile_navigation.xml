@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.nbastat_origin.ui.list_players.home.notifications.NotificationsFragment"
+        android:name="com.example.nbastat_origin.ui.list_players.home.notifications.PlayerDetailFragment"
         android:label="@string/title_players_hot"
         tools:layout="@layout/fragment_player_details" />
 </navigation>

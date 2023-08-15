@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.nbastat_origin.databinding.FragmentPlayerDetailsBinding
 
-class NotificationsFragment : Fragment() {
+class PlayerDetailFragment : Fragment() {
 
     private var _binding: FragmentPlayerDetailsBinding? = null
 
