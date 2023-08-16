@@ -31,6 +31,7 @@ class PlayersRepository(
 
     suspend fun insertPlayersInDao(players: List<PlayerVO>) {
         playersDataBase.playerDao().insertPlayers(players)
+        updateLastDownloadTime()
     }
 
     private fun getOnlineOrNot(): Boolean {
@@ -47,6 +48,13 @@ class PlayersRepository(
         return (differenceMillis > oneDayMillis)
     }
 
+    private fun updateLastDownloadTime() {
+        val currentTimeMillis = Calendar.getInstance().time.time
+
+        // Atualiza o horário do último download no SharedPreferences
+        sharedPreferences.edit().putLong("last_download_time", currentTimeMillis).apply()
+    }
+
     suspend fun getPlayers(): Flow<ListFragmentState> = flow {
         emit(
             ListFragmentState(
@@ -54,54 +62,15 @@ class PlayersRepository(
             )
         )
         try {
-            val response : Response<List<PlayerDTO>>
-            if (!getOnlineOrNot()) {
-                val myPlayers = playersDataBase.playerDao().getAllPlayers()
-                Log.d("BANCO", myPlayers.toString())
-                if (myPlayers.isNotEmpty()) {
-                    Log.d("BANCO", "LOCAL")
-                    emit(ListFragmentState(listPlayers = myPlayers))
-                } else {
-                    response = playersApi.getPlayers()
-                    Log.d("BANCO", "ONLINE")
-                    if (response.isSuccessful && response.body().isNullOrEmpty()) {
-                        response.body()?.let { listPlayerSDTO ->
-                            emit(ListFragmentState(playersConverter.convert(listPlayerSDTO)))
-                            insertPlayersInDao(playersConverter.convert(listPlayerSDTO))
-                        } ?: run {
-                            emit(
-                                ListFragmentState(
-                                    errorData = ErrorData(
-                                        errorCode = 1,
-                                        errorMessage = "Body Error"
-                                    )
-                                )
-                            )
-                        }
-                    } else {
-                        val errorMessage = "Error: ${response.code()}"
-                        emit(
-                            ListFragmentState(
-                                errorData = ErrorData(
-                                    errorCode = 2,
-                                    errorMessage = errorMessage
-                                )
-                            )
-                        )
-                    }
-                }
-            } else {
+            val response: Response<List<PlayerDTO>>
+            if (getOnlineOrNot()) {
                 response = playersApi.getPlayers()
+                Log.d("BANCO", "ONLINE")
                 if (response.isSuccessful && !response.body().isNullOrEmpty()) {
-                    Log.d("ERROR", "Body Error1")
                     response.body()?.let { listPlayerSDTO ->
-                        Log.d("ERROR", "Body Error2")
                         emit(ListFragmentState(playersConverter.convert(listPlayerSDTO)))
-                        Log.d("ERROR", "Body Error3")
                         insertPlayersInDao(playersConverter.convert(listPlayerSDTO))
-                        Log.d("ERROR", "Body Error4")
                     } ?: run {
-                        Log.d("ERROR", "Body Error5")
                         emit(
                             ListFragmentState(
                                 errorData = ErrorData(
@@ -113,11 +82,31 @@ class PlayersRepository(
                     }
                 } else {
                     val errorMessage = "Error: ${response.code()}"
+                    val listPlays = playersDataBase.playerDao().getAllPlayers()
+                    if (listPlays.isNotEmpty()) {
+                        emit(ListFragmentState(listPlayers = listPlays))
+                    } else {
+                        emit(
+                            ListFragmentState(
+                                errorData = ErrorData(
+                                    errorCode = 2,
+                                    errorMessage = errorMessage
+                                )
+                            )
+                        )
+                    }
+                }
+            } else {
+                val listPlays = playersDataBase.playerDao().getAllPlayers()
+
+                if (listPlays.isNotEmpty()) {
+                    emit(ListFragmentState(listPlayers = listPlays))
+                } else {
                     emit(
                         ListFragmentState(
                             errorData = ErrorData(
                                 errorCode = 2,
-                                errorMessage = errorMessage
+                                errorMessage = "Banco Vazio"
                             )
                         )
                     )
@@ -133,6 +122,19 @@ class PlayersRepository(
                     )
                 )
             )
+            val listPlays = playersDataBase.playerDao().getAllPlayers()
+            if (listPlays.isNotEmpty()) {
+                emit(ListFragmentState(listPlayers = listPlays))
+            } else {
+                emit(
+                    ListFragmentState(
+                        errorData = ErrorData(
+                            errorCode = 2,
+                            errorMessage = e.message.toString()
+                        )
+                    )
+                )
+            }
         }
     }.catch { e ->
         Log.d("ERROR", e.toString())

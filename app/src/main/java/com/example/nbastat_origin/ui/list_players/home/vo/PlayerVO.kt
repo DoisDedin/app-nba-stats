@@ -1,10 +1,13 @@
 package com.example.nbastat_origin.ui.list_players.home.vo
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "players")
+@Parcelize
 data class PlayerVO(
     @PrimaryKey val playerID: Int,
     @ColumnInfo(name = "id") val id: Int,
@@ -21,4 +24,4 @@ data class PlayerVO(
     @ColumnInfo(name = "height") val height: Int,
     @ColumnInfo(name = "weight") val weight: Int,
     @ColumnInfo(name = "photoUrl") val photoUrl: String
-)
+) : Parcelable

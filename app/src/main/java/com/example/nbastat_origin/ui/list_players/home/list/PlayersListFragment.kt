@@ -59,7 +59,7 @@ class PlayersListFragment :
     }
 
     private val itemClickListener: (PlayerVO) -> Unit = { player ->
-        DetailPlayerActivity.start(requireContext(), playerId = player.playerID, false)
+        DetailPlayerActivity.start(requireContext(), player, false)
     }
 
     private fun setObservers() {
